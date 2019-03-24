@@ -15,6 +15,8 @@ public class Player extends GameObject{
 		x += velX;
 		y += velY;	
 		
+		collision();
+		
 		if(handler.isUp()) velY = -5;
 		else if(!handler.isDown()) velY = 0;
 		
@@ -26,8 +28,23 @@ public class Player extends GameObject{
 		
 		if(handler.isRight()) velX = 5;
 		else if(!handler.isLeft()) velX = 0;
+		
+		
 	}
+	
+	private void collision(){
+		for(int i = 0; i < handler.object.size(); i++){
+			GameObject tempObject = handler.object.get(i);
 
+			if(tempObject.getId() == ID.Block){
+				if(getBounds().intersects(tempObject.getBounds())){
+					x += velX * -1;
+					y += velY * -1;
+				}
+			}
+		}
+	}
+	
 	public void render(Graphics g){
 		g.setColor(Color.RED);
 		g.fillRect(x, y, 32, 48);
