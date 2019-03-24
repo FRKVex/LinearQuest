@@ -23,6 +23,7 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler();
 		camera = new Camera(0, 0);
 		this.addKeyListener(new Control(handler));
+		this.addMouseListener(new MouseInput(handler, camera));
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		level = loader.loadImage("/Map1.png");
